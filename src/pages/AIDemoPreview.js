@@ -689,13 +689,7 @@ export default function AIDemoPreview() {
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [demoLink, setDemoLink] = useState('');
-  const [bookingState, setBookingState] = useState({
-    hasAskedForServices: false,
-    hasPhoneNumber: false,
-    hasScheduledTime: false,
-    phoneNumber: '',
-    scheduledTime: ''
-  });
+  // Removed unused bookingState and setBookingState
 
   // Generate demo link
   useEffect(() => {
@@ -721,11 +715,7 @@ export default function AIDemoPreview() {
   // Generate AI response based on configuration
   const generateAIResponse = (userMessage) => {
     const { 
-      extractedCompanyData, 
-      temperature, 
-      topP, 
-      selectedModel,
-      rulesGuidelines
+      extractedCompanyData
     } = config;
     
     const message = userMessage.toLowerCase().trim();

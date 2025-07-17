@@ -4,10 +4,7 @@ import { signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
-const planLimits = {
-  Build: { calls: 1000, sms: 10000, leads: 3000 },
-  Grow: { calls: 3000, sms: 25000, leads: 5000 },
-};
+// Removed unused planLimits
 
 const stats = [
   { label: 'Calls', value: 0, icon: '📞' },
