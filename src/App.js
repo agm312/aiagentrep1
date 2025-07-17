@@ -26,6 +26,7 @@ import Success from './pages/Success';
 import AIDemoGenerator from './pages/AIDemoGenerator';
 import AIDemoConfig from './pages/AIDemoConfig';
 import AIDemoPreview from './pages/AIDemoPreview';
+import ChicagoAIAutomation from './pages/ChicagoAIAutomation';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -94,6 +95,7 @@ function App() {
             <Route path="/ai-demo-generator" element={<AIDemoGenerator />} />
             <Route path="/ai-demo-config/:demoType" element={<AIDemoConfig />} />
             <Route path="/ai-demo-preview/:demoType" element={<AIDemoPreview />} />
+            <Route path="/chicago-ai-automation" element={<ChicagoAIAutomation />} />
           </Routes>
         </main>
         <Footer />
