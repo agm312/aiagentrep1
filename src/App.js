@@ -23,9 +23,6 @@ import Footer from './components/Footer';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Success from './pages/Success';
-import AIDemoGenerator from './pages/AIDemoGenerator';
-import AIDemoConfig from './pages/AIDemoConfig';
-import AIDemoPreview from './pages/AIDemoPreview';
 import ChicagoAIAutomation from './pages/ChicagoAIAutomation';
 
 // Scroll to top on route change
@@ -43,7 +40,7 @@ function Home() {
       <Hero />
       <Features />
       <HowItWorksSection />
-      <WhyProcessWorksSection />
+      {WhyProcessWorksSection}
       <GuaranteeSection />
       <BenefitsSection />
       <ReadyToTransform />
@@ -92,9 +89,6 @@ function App() {
             <Route path="/strategy-call" element={<StrategyCall />} />
             <Route path="/schedule-demo" element={<ScheduleDemo />} />
             <Route path="/success" element={<Success />} />
-            <Route path="/ai-demo-generator" element={<AIDemoGenerator />} />
-            <Route path="/ai-demo-config/:demoType" element={<AIDemoConfig />} />
-            <Route path="/ai-demo-preview/:demoType" element={<AIDemoPreview />} />
             <Route path="/chicago-ai-automation" element={<ChicagoAIAutomation />} />
           </Routes>
         </main>
