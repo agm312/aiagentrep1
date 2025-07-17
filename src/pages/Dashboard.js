@@ -58,16 +58,8 @@ export default function Dashboard() {
     fetchUser();
   }, []);
 
-  const handleSignOut = async () => {
-    await signOut(auth);
-    navigate('/signin');
-  };
-
   if (loading) return <div className="text-center mt-20">Loading...</div>;
   if (!userData) return <div className="text-center mt-20">No user data found.</div>;
-
-  const limits = planLimits[userData.plan] || {};
-  const { calls = 0, sms = 0, leads = 0 } = userData.usage || {};
 
   // Placeholder: Add monthly reset logic here
 

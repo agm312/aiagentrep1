@@ -118,7 +118,7 @@ export default function AIDemoConfig() {
     // Extract company name
     const companyNamePatterns = [
       /(?:about|company|we are)[:\s]+([^,\.]+)/gi,
-      /([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+(?:is|are)\s+(?:a|an)\s+([^.]+)/gi
+      /([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+(?:is|are)\s+(?:a|an)\s+([^.]*)/gi
     ];
     
     companyNamePatterns.forEach(pattern => {

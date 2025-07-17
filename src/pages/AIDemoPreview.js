@@ -725,10 +725,7 @@ export default function AIDemoPreview() {
       temperature, 
       topP, 
       selectedModel,
-      rulesGuidelines,
-      conversationFlow,
-      aiDescription,
-      languageInstructions
+      rulesGuidelines
     } = config;
     
     const message = userMessage.toLowerCase().trim();

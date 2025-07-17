@@ -1,14 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const features = [
-  'Full access to all 8 tools',
-  'Unlimited leads & campaigns',
-  'Priority support',
-];
-
-const calendlyUrl = "https://calendly.com/arturo312/ai-agency";
-
 const ReadyToTransform = () => {
   const navigate = useNavigate();
 
