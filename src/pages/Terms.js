@@ -1,19 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Terms() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setSubmitted(true);
-    // Here you would handle sending the form data to your backend or email service
-  };
-
   return (
     <section className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
       <h1 className="text-3xl md:text-4xl font-bold mb-6">Terms & Conditions</h1>
@@ -49,28 +36,8 @@ export default function Terms() {
         <p className="mb-6">We may update these Terms at any time. We will notify users of material changes, but it is your responsibility to review them periodically. Continued use of the site after changes indicates acceptance.</p>
         <h2 className="mt-10 mb-4">14. Governing Law</h2>
         <p className="mb-6">These Terms shall be governed by and construed in accordance with the laws of the State of Illinois, without regard to its conflict of law principles.</p>
-      </div>
-      <div className="bg-gray-100 rounded-xl p-8 shadow max-w-lg mx-auto">
-        <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
-        {submitted ? (
-          <div className="text-green-600 font-semibold">Thank you for reaching out! We'll get back to you soon.</div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">Name</label>
-              <input type="text" name="name" value={form.name} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" />
-            </div>
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">Email</label>
-              <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" />
-            </div>
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">How could we help you?</label>
-              <textarea name="message" value={form.message} onChange={handleChange} required rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" />
-            </div>
-            <button type="submit" className="btn-primary w-full">Send Message</button>
-          </form>
-        )}
+        <h2 className="mt-10 mb-4">15. Contact Us</h2>
+        <p className="mb-6">If you have questions or concerns about these Terms & Conditions, please contact us: <a href="mailto:info@aiagentrep.com" className="text-blue-600 hover:text-blue-800 underline">info@aiagentrep.com</a></p>
       </div>
     </section>
   );
