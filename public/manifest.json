@@ -1,7 +1,12 @@
 {
-  "short_name": "AI Assist Pro",
-  "name": "AI Assist Pro - AI Automation Tools",
+  "short_name": "AI Agent Rep",
+  "name": "AI Agent Rep - AI Automation Tools",
   "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
@@ -10,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#3B82F6",
   "background_color": "#ffffff"
 } 
