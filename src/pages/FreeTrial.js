@@ -8,7 +8,6 @@ export default function FreeTrial() {
         <form 
           name="free-trial" 
           method="POST" 
-          action="/success"
           data-netlify="true" 
           data-netlify-honeypot="bot-field"
           encType="application/x-www-form-urlencoded"

@@ -28,7 +28,6 @@ export default function Demo() {
         <form 
           name="ai-demo" 
           method="POST" 
-          action="/success"
           data-netlify="true" 
           data-netlify-honeypot="bot-field"
           encType="application/x-www-form-urlencoded"
@@ -67,7 +66,7 @@ export default function Demo() {
                 <label key={idx} className="flex items-center gap-2 text-gray-700">
                   <input
                     type="checkbox"
-                    name="problems"
+                    name="problems[]"
                     value={problem}
                     checked={selected.includes(problem)}
                     onChange={() => handleCheckbox(problem)}
