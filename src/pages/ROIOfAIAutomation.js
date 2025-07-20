@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
@@ -12,12 +12,12 @@ const ROIOfAIAutomation = () => {
 
   const [roiResult, setRoiResult] = useState(null);
 
-  const calculateROI = () => {
+  const calculateROI = useCallback(() => {
     const { totalInvestment, annualSavings, additionalRevenue, timeframe } = calculatorData;
     const totalBenefits = (annualSavings + additionalRevenue) * timeframe;
     const roi = ((totalBenefits - totalInvestment) / totalInvestment) * 100;
     setRoiResult(roi.toFixed(2));
-  };
+  }, [calculatorData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +29,7 @@ const ROIOfAIAutomation = () => {
 
   React.useEffect(() => {
     calculateROI();
-  }, [calculatorData, calculateROI]);
+  }, [calculateROI]);
 
   return (
     <>
