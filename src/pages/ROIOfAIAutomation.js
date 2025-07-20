@@ -29,7 +29,7 @@ const ROIOfAIAutomation = () => {
 
   React.useEffect(() => {
     calculateROI();
-  }, [calculatorData]);
+  }, [calculatorData, calculateROI]);
 
   return (
     <>
