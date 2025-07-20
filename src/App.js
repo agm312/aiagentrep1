@@ -25,6 +25,7 @@ import Privacy from './pages/Privacy';
 import Success from './pages/Success';
 import ChicagoAIAutomation from './pages/ChicagoAIAutomation';
 import WhatAreAIAutomationAgencies from './pages/WhatAreAIAutomationAgencies';
+import ROIOfAIAutomation from './pages/ROIOfAIAutomation';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -92,6 +93,7 @@ function App() {
             <Route path="/success" element={<Success />} />
             <Route path="/chicago-ai-automation" element={<ChicagoAIAutomation />} />
             <Route path="/what-are-ai-automation-agencies" element={<WhatAreAIAutomationAgencies />} />
+            <Route path="/roi-of-ai-automation" element={<ROIOfAIAutomation />} />
           </Routes>
         </main>
         <Footer />
