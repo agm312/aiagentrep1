@@ -91,7 +91,7 @@ export default function Hero() {
             alt="Team collaborating on laptops at a modern workspace with AI automation tools"
             className="rounded-2xl shadow-lg w-full max-w-md object-cover"
             style={{minHeight: 320}}
-            loading="lazy"
+            loading="eager"
           />
           {/* Notification Card Overlay */}
           <div 
