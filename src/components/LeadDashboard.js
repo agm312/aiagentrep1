@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import leadFormHandler from '../utils/leadFormHandler';
 import authService from '../utils/auth';
@@ -19,7 +19,7 @@ const LeadDashboard = () => {
     const sessionInterval = setInterval(updateSessionInfo, 60000);
     
     return () => clearInterval(sessionInterval);
-  }, []);
+  }, [updateSessionInfo]);
 
   const loadLeads = () => {
     try {
@@ -42,7 +42,7 @@ const LeadDashboard = () => {
     }
   };
 
-  const updateSessionInfo = () => {
+  const updateSessionInfo = useCallback(() => {
     const info = authService.getSessionInfo();
     setSessionInfo(info);
     
@@ -50,7 +50,7 @@ const LeadDashboard = () => {
     if (info && info.isExpired) {
       handleLogout();
     }
-  };
+  }, []);
 
   const handleLogout = () => {
     authService.logout();
