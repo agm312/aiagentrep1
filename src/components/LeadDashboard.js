@@ -11,15 +11,20 @@ const LeadDashboard = () => {
   const [sessionInfo, setSessionInfo] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loadLeads();
-    updateSessionInfo();
+  const handleLogout = useCallback(() => {
+    authService.logout();
+    navigate('/admin-login');
+  }, [navigate]);
+
+  const updateSessionInfo = useCallback(() => {
+    const info = authService.getSessionInfo();
+    setSessionInfo(info);
     
-    // Update session info every minute
-    const sessionInterval = setInterval(updateSessionInfo, 60000);
-    
-    return () => clearInterval(sessionInterval);
-  }, [updateSessionInfo]);
+    // Auto-logout if session expired
+    if (info && info.isExpired) {
+      handleLogout();
+    }
+  }, [handleLogout]);
 
   const loadLeads = () => {
     try {
@@ -42,20 +47,15 @@ const LeadDashboard = () => {
     }
   };
 
-  const updateSessionInfo = useCallback(() => {
-    const info = authService.getSessionInfo();
-    setSessionInfo(info);
+  useEffect(() => {
+    loadLeads();
+    updateSessionInfo();
     
-    // Auto-logout if session expired
-    if (info && info.isExpired) {
-      handleLogout();
-    }
-  }, []);
-
-  const handleLogout = () => {
-    authService.logout();
-    navigate('/admin-login');
-  };
+    // Update session info every minute
+    const sessionInterval = setInterval(updateSessionInfo, 60000);
+    
+    return () => clearInterval(sessionInterval);
+  }, [updateSessionInfo]);
 
   const formatDate = (timestamp) => {
     return new Date(timestamp).toLocaleString();
