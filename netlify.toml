@@ -8,4 +8,9 @@
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200 
+  status = 200
+
+# Form notifications
+[[webhooks]]
+  event = "submission-created"
+  url = "YOUR_ZAPIER_WEBHOOK_URL_HERE" 

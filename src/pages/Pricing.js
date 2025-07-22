@@ -7,7 +7,7 @@ const AVG_DEAL = 1000; // Average deal value in USD
 const plans = [
   {
     name: 'Build',
-    price: '$5,000/mo',
+    price: '$5,000 (set up cost)',
     features: [
       'Up to 3,000 leads',
       '10,000 SMS',
@@ -22,7 +22,7 @@ const plans = [
   },
   {
     name: 'Grow',
-    price: '$10,000/mo',
+    price: '$10,000 (set up cost)',
     features: [
       '25,000 SMS',
       '1,500 calls',
@@ -49,7 +49,7 @@ const plans = [
       '🛠️ White-label and on-call support',
     ],
     cta: 'Book Strategy Call',
-    ctaLink: '/strategy-call',
+    ctaLink: 'https://calendly.com/arturo312/ai-agency?month=2025-07',
   },
 ];
 
@@ -121,7 +121,14 @@ export default function Pricing() {
               style={{ minWidth: 280, maxWidth: 350 }}
             >
               <div className="text-2xl font-bold mb-2 text-center">{plan.name}</div>
-              <div className={`text-3xl font-extrabold mb-4 text-center ${plan.name === 'Build' ? 'text-teal-500' : plan.name === 'Grow' ? 'text-gray-800' : 'text-gray-500'}`}>{plan.price}</div>
+              <div className="text-center mb-4">
+                <div className={`text-3xl font-extrabold ${plan.name === 'Build' ? 'text-teal-500' : plan.name === 'Grow' ? 'text-gray-800' : 'text-gray-500'}`}>
+                  {plan.name === 'Dominate' ? 'Custom' : plan.price.split(' ')[0]}
+                </div>
+                {plan.name !== 'Dominate' && (
+                  <div className="text-sm text-gray-500 mt-1">(set up cost)</div>
+                )}
+              </div>
               <ul className="mb-8 w-full text-base text-left space-y-3">
                 {plan.features.map((f, i) => (
                   <li key={i} className="flex items-start gap-2">
@@ -130,16 +137,28 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              <Link
-                to={plan.ctaLink}
-                className={`w-full text-center rounded-lg px-4 lg:px-6 py-3 font-bold transition text-sm lg:text-base
-                  ${plan.name === 'Build' ? 'bg-teal-400 text-white hover:bg-teal-500' : ''}
-                  ${plan.name === 'Grow' ? 'bg-gray-900 text-white border border-gray-300 hover:bg-gray-800' : ''}
-                  ${plan.name === 'Dominate' ? 'bg-white text-teal-600 border-2 border-teal-400 hover:bg-teal-50' : ''}
-                `}
-              >
-                {plan.cta}
-              </Link>
+              {plan.name === 'Dominate' ? (
+                <a
+                  href={plan.ctaLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-full text-center rounded-lg px-4 lg:px-6 py-3 font-bold transition text-sm lg:text-base
+                    ${plan.name === 'Dominate' ? 'bg-white text-teal-600 border-2 border-teal-400 hover:bg-teal-50' : ''}
+                  `}
+                >
+                  {plan.cta}
+                </a>
+              ) : (
+                <Link
+                  to={plan.ctaLink}
+                  className={`w-full text-center rounded-lg px-4 lg:px-6 py-3 font-bold transition text-sm lg:text-base
+                    ${plan.name === 'Build' ? 'bg-teal-400 text-white hover:bg-teal-500' : ''}
+                    ${plan.name === 'Grow' ? 'bg-gray-900 text-white border border-gray-300 hover:bg-gray-800' : ''}
+                  `}
+                >
+                  {plan.cta}
+                </Link>
+              )}
             </div>
           ))}
         </div>

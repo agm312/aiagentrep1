@@ -6,7 +6,7 @@ import Features from './components/Features';
 import Pricing from './pages/Pricing';
 import About from './pages/About';
 import FeaturesPage from './pages/FeaturesPage';
-import Demo from './pages/Demo';
+
 import ReadyToTransform from './components/ReadyToTransform';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -26,6 +26,7 @@ import Success from './pages/Success';
 import ChicagoAIAutomation from './pages/ChicagoAIAutomation';
 import WhatAreAIAutomationAgencies from './pages/WhatAreAIAutomationAgencies';
 import ROIOfAIAutomation from './pages/ROIOfAIAutomation';
+import AIDemoLanding from './pages/AIDemoLanding';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -81,7 +82,7 @@ function App() {
             <Route path="/ai" element={<FeaturesPage />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/about" element={<About />} />
-            <Route path="/demo" element={<Demo />} />
+            <Route path="/demo" element={<AIDemoLanding />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
@@ -94,6 +95,7 @@ function App() {
             <Route path="/chicago-ai-automation" element={<ChicagoAIAutomation />} />
             <Route path="/what-are-ai-automation-agencies" element={<WhatAreAIAutomationAgencies />} />
             <Route path="/roi-of-ai-automation" element={<ROIOfAIAutomation />} />
+            <Route path="/ai-demo" element={<AIDemoLanding />} />
           </Routes>
         </main>
         <Footer />
