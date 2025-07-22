@@ -10,7 +10,7 @@ const DemoForm = () => {
     message: '',
     solutions: []
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -202,10 +202,10 @@ const DemoForm = () => {
                   </p>
                   <button
                     type="submit"
-                    disabled={isSubmitting || formData.solutions.length === 0}
+                    disabled={formData.solutions.length === 0}
                     className="px-8 py-3 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Request Demo'}
+                    Request Demo
                   </button>
                 </div>
               </form>

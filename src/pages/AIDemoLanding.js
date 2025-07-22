@@ -6,7 +6,7 @@ const AIDemoLanding = () => {
     name: '',
     email: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [activeFAQ, setActiveFAQ] = useState(null);
 
   const handleInputChange = (e) => {
@@ -175,10 +175,9 @@ const AIDemoLanding = () => {
                   />
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="px-8 py-3 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg"
+                    className="px-8 py-3 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-lg"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Get My Free Demo'}
+                    Get My Free Demo
                   </button>
                 </div>
                 <p className="text-sm text-gray-500">No spam. We hate it too.</p>

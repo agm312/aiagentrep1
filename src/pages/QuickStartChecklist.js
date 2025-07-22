@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import jsPDF from 'jspdf';
 
 const QuickStartChecklist = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [activeFAQ, setActiveFAQ] = useState(null);
 
   const handleInputChange = (e) => {
@@ -18,201 +17,7 @@ const QuickStartChecklist = () => {
     }));
   };
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    
-    // Set up colors
-    const primaryColor = [82, 196, 160]; // #52c4a0
-    const secondaryColor = [29, 161, 242]; // #1da1f2
-    const darkColor = [55, 65, 81]; // #374151
-    
-    // Header - Smaller vertical space
-    doc.setFillColor(...primaryColor);
-    doc.rect(0, 0, 210, 25, 'F');
-    
-    // Logo and title
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(20);
-    doc.setFont('helvetica', 'bold');
-    doc.text('AI AGENT REP', 20, 17);
-    
-    // Main title
-    doc.setTextColor(...darkColor);
-    doc.setFontSize(20);
-    doc.setFont('helvetica', 'bold');
-    doc.text('AI Agent Quick-Start Checklist', 20, 45);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'normal');
-    doc.text('10 Core Automations Every Service Business Needs', 20, 55);
-    
-    // Subtitle - Enhanced with bold benefit
-    doc.setFontSize(12);
-    doc.setTextColor(107, 114, 128); // gray-500
-    doc.text('Get your automations live in minutes (not months)', 20, 70);
-    
-    // Call-out box for interactive version
-    doc.setFillColor(255, 255, 255);
-    doc.rect(20, 85, 170, 20, 'F');
-    doc.setDrawColor(...primaryColor);
-    doc.rect(20, 85, 170, 20, 'S');
-    doc.setTextColor(...primaryColor);
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Prefer a guided experience?', 25, 95);
-    doc.setFont('helvetica', 'normal');
-    doc.text('Visit: https://calendly.com/arturo312/ai-agency?month=2025-07', 25, 102);
-    doc.text('for interactive version', 25, 109);
-    
-    // Checklist items - Exactly 10 discrete automations
-    const checklistItems = [
-      {
-        number: '1',
-        title: 'Define Your Top 3 Customer Touchpoints',
-        description: 'Examples: Website chat widget, email inquiry form, SMS follow-up.'
-      },
-      {
-        number: '2',
-        title: 'Map Each Touchpoint to an AI Agent',
-        description: 'Chatbot for instant answers, Email sequencer for nurture flows, SMS reminder for appointments'
-      },
-      {
-        number: '3',
-        title: 'Gather/Prepare Assets',
-        description: 'Chatbot script snippets, Email templates, SMS copy with merge tags'
-      },
-      {
-        number: '4',
-        title: 'Set Up Metrics Tracking',
-        description: 'Leads captured (form submissions), Email open & click-through rates, Appointments booked'
-      },
-      {
-        number: '5',
-        title: 'Create Your Landing Page',
-        description: 'Headline, sub-headline, form, social proof, Strong call-to-action button'
-      },
-      {
-        number: '6',
-        title: 'Deploy Organic Promotions',
-        description: 'Pinned comments on content, Blog banners & sidebars, Social media posts & stories'
-      },
-      {
-        number: '7',
-        title: 'Configure Paid Retargeting Ads',
-        description: 'Facebook/LinkedIn audiences based on site visitors, Google Search ads for relevant keywords'
-      },
-      {
-        number: '8',
-        title: 'Design Email Follow-Up Sequence',
-        description: 'Day 0: Deliver PDF + welcome email, Day 2: Client case study, Day 4: Short VSL walkthrough'
-      },
-      {
-        number: '9',
-        title: 'Set Up SMS Reminder System',
-        description: 'Appointment confirmations, follow-up reminders, re-engagement campaigns'
-      },
-      {
-        number: '10',
-        title: 'Plan Your Upsell Strategy',
-        description: 'Discovery call script: review checklist answers, Tailored "Build + Maintain" package offer'
-      }
-    ];
-    
-    let yPosition = 115;
-    
-    checklistItems.forEach((item, index) => {
-      // Check if we need a new page
-      if (yPosition > 250) {
-        doc.addPage();
-        yPosition = 20;
-      }
-      
-      // Number circle
-      doc.setFillColor(...primaryColor);
-      doc.circle(25, yPosition + 5, 8, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.text(item.number, 25, yPosition + 8, { align: 'center' });
-      
-      // Title
-      doc.setTextColor(...darkColor);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.text(item.title, 40, yPosition + 8);
-      
-      // Description
-      doc.setTextColor(107, 114, 128);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      
-      // Split description into multiple lines if needed
-      const splitText = doc.splitTextToSize(item.description, 150);
-      doc.text(splitText, 40, yPosition + 18);
-      
-      // Add checkbox for action prompt
-      doc.setFillColor(...primaryColor);
-      doc.rect(170, yPosition + 2, 6, 6, 'S');
-      doc.setTextColor(...primaryColor);
-      doc.setFontSize(8);
-      doc.text('□', 173, yPosition + 6);
-      
-      yPosition += 25 + (splitText.length * 5);
-    });
-    
-    // Bonus resources section
-    if (yPosition > 200) {
-      doc.addPage();
-      yPosition = 20;
-    }
-    
-    doc.setFillColor(...secondaryColor);
-    doc.rect(20, yPosition, 170, 15, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Bonus Resources Included:', 25, yPosition + 10);
-    
-    yPosition += 25;
-    
-    const bonusItems = [
-      'Email template library',
-      'SMS script examples',
-      'Chatbot conversation flows',
-      'Integration checklists',
-      'ROI calculator spreadsheet',
-      'Discovery call script',
-      'Case study templates',
-      'Gallery of real-world examples',
-      'Interactive setup guide'
-    ];
-    
-    bonusItems.forEach(item => {
-      doc.setTextColor(...darkColor);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('✓ ' + item, 25, yPosition);
-      yPosition += 8;
-    });
-    
-    // Footer - Enhanced with better CTA and social proof
-    doc.setFillColor(...primaryColor);
-    doc.rect(0, 280, 210, 25, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Ready for your custom plan?', 20, 290);
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'normal');
-    doc.text('Schedule a 15-min discovery call: calendly.com/arturo312/ai-agency', 20, 297);
-    doc.text('AI Agent Rep - Turn Clicks into Clients', 20, 304);
-    
-    // Social proof reminder
-    doc.setFontSize(9);
-    doc.text('"Saved us 5 hrs/week on lead follow-up" - Mike Chen, Marketing Agency', 20, 312);
-    
-    // Save the PDF
-    doc.save('AI-Agent-Quick-Start-Checklist.pdf');
-  };
+
 
 
 
@@ -341,20 +146,9 @@ const QuickStartChecklist = () => {
                 <p className="text-xs text-gray-500 -mt-2">Please use a business email for fastest onboarding</p>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-bold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg text-lg relative"
+                  className="w-full px-8 py-4 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-bold rounded-lg hover:opacity-90 transition-opacity shadow-lg text-lg relative"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Preparing Your Checklist...
-                    </>
-                  ) : (
-                    'Get My Free Checklist'
-                  )}
+                  Get My Free Checklist
                 </button>
               </div>
               <p className="text-sm text-gray-500 mt-3 text-center">
