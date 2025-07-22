@@ -38,13 +38,46 @@ const DemoForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Use the lead form handler to save the data
+      // First, try our custom lead form handler
       const result = await leadFormHandler.handleFormSubmission({
         ...formData,
         source: 'demo_form_page'
       });
       
-      if (result.success) {
+      // If our handler fails, fall back to Netlify Forms
+      if (!result.success) {
+        console.log('Custom handler failed, trying Netlify Forms fallback...');
+        
+        // Prepare data for Netlify Forms
+        const netlifyData = {
+          'form-name': 'demo',
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          website: formData.website,
+          message: formData.message,
+          solutions: formData.solutions.join(', '),
+          source: 'demo_form_page'
+        };
+        
+        // Submit to Netlify Forms
+        const netlifyResponse = await fetch('/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams(netlifyData)
+        });
+        
+        if (netlifyResponse.ok) {
+          console.log('Form submitted via Netlify Forms fallback');
+          setIsSubmitted(true);
+          setFormData({ name: '', email: '', company: '', website: '', message: '', solutions: [] });
+        } else {
+          throw new Error('Netlify Forms submission failed');
+        }
+      } else {
+        // Custom handler succeeded
         setIsSubmitted(true);
         setFormData({ name: '', email: '', company: '', website: '', message: '', solutions: [] });
         console.log('Demo form lead saved successfully:', result);
@@ -53,9 +86,6 @@ const DemoForm = () => {
         if (result.isPrivacyMode) {
           console.log('Form submitted in privacy mode - localStorage not available');
         }
-      } else {
-        console.error('Form submission failed:', result.errors);
-        alert(result.message || 'There was an error. Please try again.');
       }
     } catch (error) {
       console.error('Error in form submission:', error);
@@ -97,7 +127,19 @@ const DemoForm = () => {
           {/* Demo Form */}
           <div className="bg-white rounded-lg shadow-lg p-8">
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                name="demo" 
+                method="POST" 
+                data-netlify="true" 
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+              >
+                {/* Hidden fields for Netlify Forms */}
+                <input type="hidden" name="form-name" value="demo" />
+                <div className="hidden">
+                  <input name="bot-field" />
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">

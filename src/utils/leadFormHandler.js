@@ -10,6 +10,18 @@ class LeadFormHandler {
     this.storageKey = 'ai_agent_rep_leads';
   }
 
+  // Test if localStorage is available (for privacy mode detection)
+  isLocalStorageAvailable() {
+    try {
+      const test = '__localStorage_test__';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   // Validate form data
   validateFormData(formData) {
     const errors = [];
@@ -40,7 +52,7 @@ class LeadFormHandler {
   saveToLocalStorage(leadData) {
     try {
       // Check if localStorage is available
-      if (typeof localStorage === 'undefined' || !localStorage) {
+      if (!this.isLocalStorageAvailable()) {
         console.warn('localStorage not available (privacy mode or disabled)');
         return { success: false, error: 'localStorage not available' };
       }
@@ -72,7 +84,7 @@ class LeadFormHandler {
   getFromLocalStorage() {
     try {
       // Check if localStorage is available
-      if (typeof localStorage === 'undefined' || !localStorage) {
+      if (!this.isLocalStorageAvailable()) {
         console.warn('localStorage not available (privacy mode or disabled)');
         return [];
       }
@@ -157,24 +169,31 @@ class LeadFormHandler {
     }
 
     try {
-      // Save to local storage (always)
-      const localResult = this.saveToLocalStorage(formData);
+      // Check if localStorage is available first
+      const isPrivacyMode = !this.isLocalStorageAvailable();
       
-      // Save to server (if available)
+      // Save to server first (prioritize server-side storage)
       let serverResult = { success: false };
       if (this.apiEndpoint !== '/api/leads') {
-        serverResult = await this.saveToServer(formData);
+        try {
+          serverResult = await this.saveToServer(formData);
+        } catch (serverError) {
+          console.warn('Server save failed:', serverError);
+        }
       }
 
+      // Save to local storage (if available)
+      const localResult = this.saveToLocalStorage(formData);
+      
       // Send email notification (if configured)
       const emailResult = await this.sendEmailNotification(formData);
 
-      // Check if we're in privacy mode and provide appropriate feedback
-      const isPrivacyMode = !localResult.success && localResult.error === 'localStorage not available';
+      // Determine success based on server OR local storage
+      const isSuccessful = serverResult.success || localResult.success;
       
       // Return success response
       return {
-        success: true,
+        success: isSuccessful,
         leadId: localResult.leadId || serverResult.data?.leadId,
         message: isPrivacyMode 
           ? 'Thank you! Your submission has been sent to our team. Please check your email for confirmation.'
