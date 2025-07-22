@@ -46,8 +46,13 @@ const DemoForm = () => {
       
       if (result.success) {
         setIsSubmitted(true);
-        setFormData({ name: '', email: '', company: '', message: '' });
+        setFormData({ name: '', email: '', company: '', website: '', message: '', solutions: [] });
         console.log('Demo form lead saved successfully:', result);
+        
+        // Show privacy mode warning if applicable
+        if (result.isPrivacyMode) {
+          console.log('Form submitted in privacy mode - localStorage not available');
+        }
       } else {
         console.error('Form submission failed:', result.errors);
         alert(result.message || 'There was an error. Please try again.');

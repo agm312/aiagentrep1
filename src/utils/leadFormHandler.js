@@ -39,6 +39,12 @@ class LeadFormHandler {
   // Save lead data to local storage (for development/testing)
   saveToLocalStorage(leadData) {
     try {
+      // Check if localStorage is available
+      if (typeof localStorage === 'undefined' || !localStorage) {
+        console.warn('localStorage not available (privacy mode or disabled)');
+        return { success: false, error: 'localStorage not available' };
+      }
+
       const existingLeads = this.getFromLocalStorage();
       const newLead = {
         ...leadData,
@@ -65,6 +71,12 @@ class LeadFormHandler {
   // Get leads from local storage
   getFromLocalStorage() {
     try {
+      // Check if localStorage is available
+      if (typeof localStorage === 'undefined' || !localStorage) {
+        console.warn('localStorage not available (privacy mode or disabled)');
+        return [];
+      }
+
       const leads = localStorage.getItem(this.storageKey);
       return leads ? JSON.parse(leads) : [];
     } catch (error) {
@@ -157,11 +169,17 @@ class LeadFormHandler {
       // Send email notification (if configured)
       const emailResult = await this.sendEmailNotification(formData);
 
+      // Check if we're in privacy mode and provide appropriate feedback
+      const isPrivacyMode = !localResult.success && localResult.error === 'localStorage not available';
+      
       // Return success response
       return {
         success: true,
-        leadId: localResult.leadId,
-        message: 'Thank you! Your checklist is being prepared.',
+        leadId: localResult.leadId || serverResult.data?.leadId,
+        message: isPrivacyMode 
+          ? 'Thank you! Your submission has been sent to our team. Please check your email for confirmation.'
+          : 'Thank you! Your checklist is being prepared.',
+        isPrivacyMode,
         data: {
           local: localResult,
           server: serverResult,
