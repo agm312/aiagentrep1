@@ -30,47 +30,10 @@ const DemoForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email) return;
-    
+  const handleSubmit = (e) => {
+    // Let Netlify handle the form submission naturally
+    // The form will submit to Netlify's endpoint automatically
     setIsSubmitting(true);
-    
-    try {
-      // Prepare data for Netlify Forms
-      const netlifyData = {
-        'form-name': 'demo-request',
-        name: formData.name,
-        email: formData.email,
-        company: formData.company,
-        website: formData.website,
-        message: formData.message,
-        solutions: formData.solutions.join(', '),
-        source: 'demo_form_page'
-      };
-      
-      // Submit directly to Netlify Forms
-      const netlifyResponse = await fetch('/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(netlifyData)
-      });
-      
-      if (netlifyResponse.ok) {
-        console.log('Demo request form submitted via Netlify Forms');
-        setIsSubmitted(true);
-        setFormData({ name: '', email: '', company: '', website: '', message: '', solutions: [] });
-      } else {
-        throw new Error('Netlify Forms submission failed');
-      }
-    } catch (error) {
-      console.error('Error in form submission:', error);
-      alert('There was an error processing your submission. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -105,16 +68,17 @@ const DemoForm = () => {
           {/* Demo Form */}
           <div className="bg-white rounded-lg shadow-lg p-8">
             {!isSubmitted ? (
-              <form 
-                name="demo-request" 
-                method="POST" 
-                data-netlify="true" 
-                netlify-honeypot="bot-field"
-                onSubmit={handleSubmit} 
-                className="space-y-6"
-              >
+                          <form 
+              name="demo-request" 
+              method="POST" 
+              data-netlify="true" 
+              netlify-honeypot="bot-field"
+              action="/success"
+              className="space-y-6"
+            >
                 {/* Hidden fields for Netlify Forms */}
                 <input type="hidden" name="form-name" value="demo-request" />
+                <input type="hidden" name="source" value="demo_form_page" />
                 <div className="hidden">
                   <input name="bot-field" />
                 </div>
@@ -211,6 +175,16 @@ const DemoForm = () => {
                       </label>
                     ))}
                   </div>
+                  
+                  {/* Hidden inputs for solutions to ensure they're submitted with the form */}
+                  {formData.solutions.map((solution, index) => (
+                    <input
+                      key={`hidden-${index}`}
+                      type="hidden"
+                      name="solutions"
+                      value={solution}
+                    />
+                  ))}
                 </div>
 
                 <div>
