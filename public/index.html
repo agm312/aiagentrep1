@@ -58,10 +58,22 @@
     <form name="ai-demo" netlify netlify-honeypot="bot-field" hidden>
       <input type="text" name="name" />
       <input type="email" name="email" />
+      <input name="bot-field" />
+    </form>
+    
+    <form name="demo-request" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
       <input type="text" name="company" />
       <input type="url" name="website" />
-      <input type="tel" name="phone" />
-      <input type="checkbox" name="problems[]" />
+      <textarea name="message"></textarea>
+      <input type="hidden" name="solutions" />
+      <input name="bot-field" />
+    </form>
+    
+    <form name="checklist" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
       <input name="bot-field" />
     </form>
   </body>
