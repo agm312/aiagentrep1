@@ -223,17 +223,30 @@ const QuickStartChecklist = () => {
     setIsSubmitting(true);
     
     try {
-      // Use the lead form handler to save the data
-      const result = await leadFormHandler.handleFormSubmission(formData);
+      // Prepare data for Netlify Forms
+      const netlifyData = {
+        'form-name': 'checklist',
+        name: formData.name,
+        email: formData.email,
+        source: 'checklist_landing_page'
+      };
       
-      if (result.success) {
+      // Submit directly to Netlify Forms
+      const netlifyResponse = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(netlifyData)
+      });
+      
+      if (netlifyResponse.ok) {
+        console.log('Checklist form submitted via Netlify Forms');
         setIsSubmitted(true);
         // Generate and download professional PDF
         generatePDF();
-        console.log('Lead saved successfully:', result);
       } else {
-        console.error('Form submission failed:', result.errors);
-        alert(result.message || 'There was an error. Please try again.');
+        throw new Error('Netlify Forms submission failed');
       }
     } catch (error) {
       console.error('Error in form submission:', error);
@@ -333,7 +346,19 @@ const QuickStartChecklist = () => {
 
           {/* Email Form - Enhanced */}
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-12">
+            <form 
+              name="checklist" 
+              method="POST" 
+              data-netlify="true" 
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit} 
+              className="max-w-md mx-auto mb-12"
+            >
+              {/* Hidden fields for Netlify Forms */}
+              <input type="hidden" name="form-name" value="checklist" />
+              <div className="hidden">
+                <input name="bot-field" />
+              </div>
               <div className="space-y-4">
                 <input
                   type="text"

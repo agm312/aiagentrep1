@@ -26,19 +26,29 @@ const AIDemoLanding = () => {
     setIsSubmitting(true);
     
     try {
-      // Use the lead form handler to save the data
-      const result = await leadFormHandler.handleFormSubmission({
-        ...formData,
+      // Prepare data for Netlify Forms
+      const netlifyData = {
+        'form-name': 'ai-demo',
+        name: formData.name,
+        email: formData.email,
         source: 'ai_demo_landing_page'
+      };
+      
+      // Submit directly to Netlify Forms
+      const netlifyResponse = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(netlifyData)
       });
       
-      if (result.success) {
+      if (netlifyResponse.ok) {
+        console.log('AI Demo form submitted via Netlify Forms');
         setIsSubmitted(true);
         setFormData({ name: '', email: '' });
-        console.log('Demo lead saved successfully:', result);
       } else {
-        console.error('Form submission failed:', result.errors);
-        alert(result.message || 'There was an error. Please try again.');
+        throw new Error('Netlify Forms submission failed');
       }
     } catch (error) {
       console.error('Error in form submission:', error);
@@ -169,7 +179,19 @@ const AIDemoLanding = () => {
 
           {/* Email Form - Above the fold */}
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-8">
+            <form 
+              name="ai-demo" 
+              method="POST" 
+              data-netlify="true" 
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit} 
+              className="max-w-md mx-auto mb-8"
+            >
+              {/* Hidden fields for Netlify Forms */}
+              <input type="hidden" name="form-name" value="ai-demo" />
+              <div className="hidden">
+                <input name="bot-field" />
+              </div>
               <div className="flex flex-col gap-3">
                 <input
                   type="text"
