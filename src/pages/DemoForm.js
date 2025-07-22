@@ -173,7 +173,7 @@ const DemoForm = () => {
                       'Automate client communications and updates',
                       'Streamline scheduling and reminders',
                       'Integrate with my CRM or calendar',
-                      'social media posting and content scheduling'
+                      'Social media posting and content scheduling'
                     ].map((solution) => (
                       <label key={solution} className="flex items-center space-x-3 cursor-pointer">
                         <input
