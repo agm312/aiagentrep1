@@ -5,12 +5,21 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Handle client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Form notifications
+# Netlify Functions configuration
+[functions]
+  directory = "netlify/functions"
+
+# Environment variables (set these in Netlify dashboard)
+[context.production.environment]
+  NODE_ENV = "production"
+
+# Form notifications (optional - for native Netlify forms)
 [[webhooks]]
   event = "submission-created"
   url = "YOUR_ZAPIER_WEBHOOK_URL_HERE" 

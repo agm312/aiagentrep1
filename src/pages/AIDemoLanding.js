@@ -1,24 +1,51 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import leadFormHandler from '../utils/leadFormHandler';
 
 const AIDemoLanding = () => {
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: ''
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [activeFAQ, setActiveFAQ] = useState(null);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email) return;
+    if (!formData.email) return;
     
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Use the lead form handler to save the data
+      const result = await leadFormHandler.handleFormSubmission({
+        ...formData,
+        source: 'ai_demo_landing_page'
+      });
+      
+      if (result.success) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '' });
+        console.log('Demo lead saved successfully:', result);
+      } else {
+        console.error('Form submission failed:', result.errors);
+        alert(result.message || 'There was an error. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error in form submission:', error);
+      alert('There was an error processing your submission. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setEmail('');
-    }, 1000);
+    }
   };
 
   const toggleFAQ = (index) => {
@@ -143,24 +170,36 @@ const AIDemoLanding = () => {
           {/* Email Form - Above the fold */}
           {!isSubmitted ? (
             <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-8">
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col gap-3">
                 <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#52c4a0] focus:border-transparent outline-none"
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Your name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#52c4a0] focus:border-transparent outline-none"
                   required
                 />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-8 py-3 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Get My Free Demo'}
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Your business email"
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#52c4a0] focus:border-transparent outline-none"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-8 py-3 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg"
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Get My Free Demo'}
+                  </button>
+                </div>
+                <p className="text-sm text-gray-500">No spam. We hate it too.</p>
               </div>
-              <p className="text-sm text-gray-500 mt-2">No spam. We hate it too.</p>
             </form>
           ) : (
             <div className="max-w-md mx-auto mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">

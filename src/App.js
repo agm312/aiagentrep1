@@ -27,6 +27,11 @@ import ChicagoAIAutomation from './pages/ChicagoAIAutomation';
 import WhatAreAIAutomationAgencies from './pages/WhatAreAIAutomationAgencies';
 import ROIOfAIAutomation from './pages/ROIOfAIAutomation';
 import AIDemoLanding from './pages/AIDemoLanding';
+import DemoForm from './pages/DemoForm';
+import QuickStartChecklist from './pages/QuickStartChecklist';
+import LeadDashboard from './components/LeadDashboard';
+import AdminLogin from './components/AdminLogin';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -82,8 +87,9 @@ function App() {
             <Route path="/ai" element={<FeaturesPage />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/about" element={<About />} />
-            <Route path="/demo" element={<AIDemoLanding />} />
-            <Route path="/signin" element={<SignIn />} />
+                                    <Route path="/demo" element={<DemoForm />} />
+                        <Route path="/ai-demo" element={<AIDemoLanding />} />
+                        <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             <Route path="/feature/:id" element={<FeatureDetail />} />
@@ -94,8 +100,14 @@ function App() {
             <Route path="/success" element={<Success />} />
             <Route path="/chicago-ai-automation" element={<ChicagoAIAutomation />} />
             <Route path="/what-are-ai-automation-agencies" element={<WhatAreAIAutomationAgencies />} />
-            <Route path="/roi-of-ai-automation" element={<ROIOfAIAutomation />} />
-            <Route path="/ai-demo" element={<AIDemoLanding />} />
+                                    <Route path="/roi-of-ai-automation" element={<ROIOfAIAutomation />} />
+                        <Route path="/checklist" element={<QuickStartChecklist />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/leads" element={
+              <ProtectedRoute>
+                <LeadDashboard />
+              </ProtectedRoute>
+            } />
           </Routes>
         </main>
         <Footer />
