@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import jsPDF from 'jspdf';
-import leadFormHandler from '../utils/leadFormHandler';
 
 const QuickStartChecklist = () => {
   const [formData, setFormData] = useState({
