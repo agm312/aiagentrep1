@@ -11,7 +11,6 @@ const DemoForm = () => {
     solutions: []
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,11 +29,7 @@ const DemoForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    // Let Netlify handle the form submission naturally
-    // The form will submit to Netlify's endpoint automatically
-    setIsSubmitting(true);
-  };
+
 
   return (
     <>
@@ -67,7 +62,6 @@ const DemoForm = () => {
 
           {/* Demo Form */}
           <div className="bg-white rounded-lg shadow-lg p-8">
-            {!isSubmitted ? (
                           <form 
               name="demo-request" 
               method="POST" 
@@ -215,30 +209,6 @@ const DemoForm = () => {
                   </button>
                 </div>
               </form>
-            ) : (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Demo Request Submitted!
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Thank you for your interest! We'll review your requirements and get back to you within 24 hours to schedule your personalized AI automation demo.
-                </p>
-                <button
-                  onClick={() => {
-                    setIsSubmitted(false);
-                    setFormData({ name: '', email: '', company: '', website: '', message: '', solutions: [] });
-                  }}
-                  className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
-                >
-                  Submit Another Request
-                </button>
-              </div>
-            )}
           </div>
 
           {/* Additional Info */}

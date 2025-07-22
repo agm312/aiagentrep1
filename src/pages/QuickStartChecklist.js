@@ -8,7 +8,6 @@ const QuickStartChecklist = () => {
     email: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [activeFAQ, setActiveFAQ] = useState(null);
 
   const handleInputChange = (e) => {
@@ -215,15 +214,7 @@ const QuickStartChecklist = () => {
     doc.save('AI-Agent-Quick-Start-Checklist.pdf');
   };
 
-  const handleSubmit = (e) => {
-    // Let Netlify handle the form submission naturally
-    // The form will submit to Netlify's endpoint automatically
-    setIsSubmitting(true);
-    // Generate and download professional PDF after form submission
-    setTimeout(() => {
-      generatePDF();
-    }, 1000);
-  };
+
 
   const toggleFAQ = (index) => {
     setActiveFAQ(activeFAQ === index ? null : index);
@@ -314,7 +305,6 @@ const QuickStartChecklist = () => {
           </div>
 
           {/* Email Form - Enhanced */}
-          {!isSubmitted ? (
             <form 
               name="checklist" 
               method="POST" 
@@ -389,7 +379,6 @@ const QuickStartChecklist = () => {
                 </a>
               </div>
             </div>
-          )}
         </section>
 
         {/* Social Proof - Enhanced */}

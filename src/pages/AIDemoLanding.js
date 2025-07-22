@@ -7,7 +7,6 @@ const AIDemoLanding = () => {
     email: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [activeFAQ, setActiveFAQ] = useState(null);
 
   const handleInputChange = (e) => {
@@ -18,11 +17,7 @@ const AIDemoLanding = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    // Let Netlify handle the form submission naturally
-    // The form will submit to Netlify's endpoint automatically
-    setIsSubmitting(true);
-  };
+
 
   const toggleFAQ = (index) => {
     setActiveFAQ(activeFAQ === index ? null : index);
@@ -144,7 +139,6 @@ const AIDemoLanding = () => {
           </ul>
 
           {/* Email Form - Above the fold */}
-          {!isSubmitted ? (
             <form 
               name="ai-demo" 
               method="POST" 
@@ -190,11 +184,6 @@ const AIDemoLanding = () => {
                 <p className="text-sm text-gray-500">No spam. We hate it too.</p>
               </div>
             </form>
-          ) : (
-            <div className="max-w-md mx-auto mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
-              <p className="text-green-800 font-semibold">Thank you! We'll be in touch soon with your free AI automation demo details.</p>
-            </div>
-          )}
 
 
         </section>
