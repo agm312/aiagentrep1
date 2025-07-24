@@ -373,16 +373,20 @@ const QuickStartChecklist = () => {
 
         {/* Final CTA */}
         <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Automate Your Lead Generation?</h2>
-          <p className="text-xl text-gray-600 mb-8">Join 500+ service businesses that are booking appointments on autopilot</p>
-          <a
-            href="https://calendly.com/arturo312/ai-agency"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-bold rounded-lg hover:opacity-90 transition-opacity shadow-lg text-lg"
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">The Agency Blueprint for Predictable Revenue</h2>
+          <p className="text-xl text-gray-600 mb-8">Join hundreds of service businesses using this exact checklist to generate 3× more qualified leads.</p>
+          <button
+            onClick={() => {
+              // Scroll to top of page smoothly
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
+            }}
+            className="inline-block px-8 py-4 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-bold rounded-lg hover:opacity-90 transition-opacity shadow-lg text-lg cursor-pointer"
           >
             Get My Free Checklist Now
-          </a>
+          </button>
         </section>
       </div>
     </>
