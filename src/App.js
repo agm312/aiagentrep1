@@ -98,7 +98,7 @@ function App() {
             <Route path="/chicago-ai-automation" element={<ChicagoAIAutomation />} />
             <Route path="/what-are-ai-automation-agencies" element={<WhatAreAIAutomationAgencies />} />
                                     <Route path="/roi-of-ai-automation" element={<ROIOfAIAutomation />} />
-            <Route path="/setup-cost-for-ai-automation" element={<h1 style={{ color: "white", padding: "50px", textAlign: "center" }}>✅ Test Route Loads - SetupCostForAIAutomation Component is the Issue</h1>} />
+            <Route path="/setup-cost-for-ai-automation" element={<SetupCostForAIAutomation />} />
             <Route path="/checklist" element={<QuickStartChecklist />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminPage />} />
