@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Users, 
   Mail, 
@@ -12,10 +12,8 @@ import {
   Edit, 
   Trash2,
   Plus,
-  BarChart3,
   Activity,
   DollarSign,
-  Clock,
   UserPlus,
   Target,
   Zap
@@ -41,11 +39,7 @@ const AdminDashboard = () => {
   const [smsData, setSmsData] = useState({ template: 'welcome', message: '' });
   const [showAddClientModal, setShowAddClientModal] = useState(false);
 
-  useEffect(() => {
-    fetchClients();
-  }, [searchTerm, statusFilter]);
-
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     try {
       const params = new URLSearchParams();
       if (statusFilter !== 'all') params.append('status', statusFilter);
@@ -102,7 +96,11 @@ const AdminDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm, statusFilter]);
+
+  useEffect(() => {
+    fetchClients();
+  }, [fetchClients]);
 
   const sendEmail = async (client) => {
     try {
