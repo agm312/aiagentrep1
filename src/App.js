@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Features from './components/Features';
+import HowItWorksSection from './components/HowItWorksSection';
+import GuaranteeSection from './components/GuaranteeSection';
+import WhyChoose from './components/WhyChoose';
 import Pricing from './pages/Pricing';
 import About from './pages/About';
 import FeaturesPage from './pages/FeaturesPage';
@@ -42,6 +46,10 @@ function Home() {
   return (
     <>
       <Hero />
+      <Features />
+      <HowItWorksSection />
+      <GuaranteeSection />
+      <WhyChoose />
     </>
   );
 }
