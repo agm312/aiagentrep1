@@ -3,6 +3,7 @@ import { X, User, Mail, Phone, Building, Target, MessageSquare, Calendar, Dollar
 
 const AddClientModal = ({ isOpen, onClose, onClientAdded }) => {
   const [activeTab, setActiveTab] = useState('basic');
+  const tabs = ['basic', 'business', 'services', 'campaign'];
   const [formData, setFormData] = useState({
     // Basic Info
     name: '',
@@ -498,7 +499,6 @@ const AddClientModal = ({ isOpen, onClose, onClientAdded }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      const tabs = ['basic', 'business', 'services', 'campaign'];
                       const currentIndex = tabs.indexOf(activeTab);
                       setActiveTab(tabs[currentIndex - 1]);
                     }}
@@ -511,7 +511,6 @@ const AddClientModal = ({ isOpen, onClose, onClientAdded }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      const tabs = ['basic', 'business', 'services', 'campaign'];
                       const currentIndex = tabs.indexOf(activeTab);
                       setActiveTab(tabs[currentIndex + 1]);
                     }}
