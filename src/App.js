@@ -29,9 +29,12 @@ import ROIOfAIAutomation from './pages/ROIOfAIAutomation';
 import AIDemoLanding from './pages/AIDemoLanding';
 import DemoForm from './pages/DemoForm';
 import QuickStartChecklist from './pages/QuickStartChecklist';
+import SetupCostForAIAutomation from './pages/SetupCostForAIAutomation';
 import LeadDashboard from './components/LeadDashboard';
 import AdminLogin from './components/AdminLogin';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminPage from './pages/AdminPage';
+import AIChatbot from './components/AIChatbot';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -46,12 +49,6 @@ function Home() {
   return (
     <>
       <Hero />
-      <Features />
-      <HowItWorksSection />
-      {WhyProcessWorksSection}
-      <GuaranteeSection />
-      <BenefitsSection />
-      <ReadyToTransform />
     </>
   );
 }
@@ -74,7 +71,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-white flex flex-col">
+      <div className="min-h-screen bg-dark-950 flex flex-col">
         {/* Skip to main content link for screen readers */}
         <a href="#main-content" className="skip-link">
           Skip to main content
@@ -101,8 +98,10 @@ function App() {
             <Route path="/chicago-ai-automation" element={<ChicagoAIAutomation />} />
             <Route path="/what-are-ai-automation-agencies" element={<WhatAreAIAutomationAgencies />} />
                                     <Route path="/roi-of-ai-automation" element={<ROIOfAIAutomation />} />
-                        <Route path="/checklist" element={<QuickStartChecklist />} />
+            <Route path="/setup-cost-for-ai-automation" element={<h1 style={{ color: "white", padding: "50px", textAlign: "center" }}>✅ Test Route Loads - SetupCostForAIAutomation Component is the Issue</h1>} />
+            <Route path="/checklist" element={<QuickStartChecklist />} />
             <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/leads" element={
               <ProtectedRoute>
                 <LeadDashboard />
@@ -111,6 +110,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <AIChatbot />
       </div>
     </Router>
   );
