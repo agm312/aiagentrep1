@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 const SetupCostForAIAutomation = () => {
+  console.log('✅ SetupCostForAIAutomation component starting');
+  
   const [openFAQ, setOpenFAQ] = useState(null);
-
-  // Debug logging
-  console.log('SetupCostForAIAutomation component rendering');
+  console.log('✅ State initialized');
 
   const toggleFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
 
-  return (
+  console.log('✅ About to render JSX');
+
+  try {
+    return (
     <>
       <Helmet>
         <title>AI Automation Setup Cost in 2025 | AI Agent Rep</title>
@@ -33,27 +36,29 @@ const SetupCostForAIAutomation = () => {
         
         {/* Schema Markup */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": "AI Automation Setup Cost in 2025 | AI Agent Rep",
-            "description": "Discover the full cost breakdown of setting up AI automation—from consultation to monthly fees. Tailored for small to enterprise businesses.",
-            "image": "https://aiagentrep.com/preview-image.jpg",
-            "author": {
-              "@type": "Organization",
-              "name": "AI Agent Rep"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "AI Agent Rep",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://aiagentrep.com/favicon.svg"
-              }
-            },
-            "datePublished": "2025-01-01",
-            "dateModified": "2025-01-01"
-          })}
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": "AI Automation Setup Cost in 2025 | AI Agent Rep",
+              "description": "Discover the full cost breakdown of setting up AI automation—from consultation to monthly fees. Tailored for small to enterprise businesses.",
+              "image": "https://aiagentrep.com/preview-image.jpg",
+              "author": {
+                "@type": "Organization",
+                "name": "AI Agent Rep"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "AI Agent Rep",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://aiagentrep.com/favicon.svg"
+                }
+              },
+              "datePublished": "2025-01-01",
+              "dateModified": "2025-01-01"
+            }
+          `}
         </script>
       </Helmet>
       
@@ -556,6 +561,17 @@ const SetupCostForAIAutomation = () => {
       </div>
     </>
   );
+  } catch (error) {
+    console.error('❌ Error in SetupCostForAIAutomation:', error);
+    return (
+      <div className="bg-white min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Something went wrong</h1>
+          <p className="text-gray-600">Please refresh the page or contact support.</p>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default SetupCostForAIAutomation; 
