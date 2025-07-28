@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 const SetupCostForAIAutomation = () => {
+  // Move all useState hooks to the top level - outside of try-catch
+  const [openFAQ, setOpenFAQ] = useState(null);
+  const [businessSize, setBusinessSize] = useState('small');
+  const [industry, setIndustry] = useState('other');
+
   try {
     console.log("✅ SetupCostForAIAutomation component starting");
-    
-    const [openFAQ, setOpenFAQ] = useState(null);
-    const [businessSize, setBusinessSize] = useState('small');
-    const [industry, setIndustry] = useState('other');
-    
     console.log("✅ State initialized");
 
     const toggleFAQ = (index) => {
