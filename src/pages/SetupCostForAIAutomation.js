@@ -18,9 +18,9 @@ const SetupCostForAIAutomation = () => {
     // Calculate costs based on selections
     const calculateCosts = () => {
       const baseSetupCosts = {
-        small: 2500,
-        medium: 5000,
-        large: 10000
+        small: 5000,
+        medium: 10000,
+        large: 25000
       };
       
       const baseMonthlyCosts = {
