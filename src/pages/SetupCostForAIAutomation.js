@@ -4,6 +4,9 @@ import { Helmet } from 'react-helmet';
 const SetupCostForAIAutomation = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
 
+  // Debug logging
+  console.log('SetupCostForAIAutomation component rendering');
+
   const toggleFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
