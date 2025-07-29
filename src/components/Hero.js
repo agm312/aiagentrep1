@@ -1,7 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Hero() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const images = [
+    {
+      url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      alt: "Team collaborating on business strategy",
+      description: "Team working at table"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      alt: "Business meeting with laptops and coffee",
+      description: "Modern workspace collaboration"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      alt: "Team brainstorming with digital displays",
+      description: "AI-powered team collaboration"
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
     <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -80,29 +108,56 @@ export default function Hero() {
             </div>
           </div>
           
-          {/* Right Column - Image with Overlay */}
+          {/* Right Column - Rotating Images with Overlay */}
           <div className="relative">
-            <div className="relative">
-              {/* Main Image */}
-              <div className="w-full h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg relative overflow-hidden">
-                {/* Placeholder for the table image */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🖥️</div>
-                    <p className="text-gray-500">Team working at table</p>
-                  </div>
+            <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-lg">
+              {/* Rotating Images */}
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-opacity duration-1000 ${
+                    index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-20"></div>
                 </div>
-                
-                {/* Overlay Box */}
-                <div className="absolute bottom-4 left-4 bg-green-100 border border-green-200 rounded-lg p-4 max-w-xs">
-                  <div className="flex items-center mb-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                    <span className="text-sm font-medium text-green-800">AI Agent Active</span>
-                  </div>
-                  <p className="text-sm text-green-700">
-                    "Just qualified 3 new leads and scheduled 2 appointments while you were in your meeting!"
-                  </p>
+              ))}
+              
+              {/* Image Description */}
+              <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 rounded-lg px-3 py-2">
+                <p className="text-gray-700 text-sm font-medium">
+                  {images[currentImageIndex].description}
+                </p>
+              </div>
+              
+              {/* Overlay Box */}
+              <div className="absolute bottom-4 right-4 bg-green-100 border border-green-200 rounded-lg p-4 max-w-xs">
+                <div className="flex items-center mb-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                  <span className="text-sm font-medium text-green-800">AI Agent Active</span>
                 </div>
+                <p className="text-sm text-green-700">
+                  "Just qualified 3 new leads and scheduled 2 appointments while you were in your meeting!"
+                </p>
+              </div>
+              
+              {/* Image Navigation Dots */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === currentImageIndex ? 'bg-white' : 'bg-white bg-opacity-50'
+                    }`}
+                  />
+                ))}
               </div>
             </div>
           </div>
