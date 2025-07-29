@@ -1,77 +1,67 @@
 import React from 'react';
 
-const features = [
+const services = [
   {
-    number: "1",
-    title: "ENGAGE INSTANTLY",
-    description: "It's seamless to set up and you'll never miss a new inbound lead again. AI Agent Rep starts real conversations via email, SMS, chat & WhatsApp, responding in seconds.",
-    benefits: [
-      "Easy setup & CRM integration",
-      "Enjoy lightning-fast AI responses"
-    ]
+    icon: "📞",
+    title: "Automated Booking Calls",
+    description: "AI-powered call scripts and booking automation"
   },
   {
-    number: "2", 
-    title: "QUALIFY AUTOMATICALLY",
-    description: "Your AI agent asks the right questions to understand customer needs, budget, and timeline. Only qualified leads reach your sales team.",
-    benefits: [
-      "Smart lead scoring system",
-      "Pre-qualified appointments only"
-    ]
+    icon: "💬",
+    title: "Smart Text Messaging",
+    description: "Automated SMS campaigns and lead nurturing"
   },
   {
-    number: "3",
-    title: "BOOK APPOINTMENTS",
-    description: "AI Agent Rep seamlessly integrates with your calendar to book qualified prospects directly into your schedule. No more back-and-forth emails.",
-    benefits: [
-      "Calendar sync & timezone handling",
-      "Instant booking confirmations"
-    ]
+    icon: "🎯",
+    title: "Lead Qualification",
+    description: "Intelligent lead scoring and assessment"
+  },
+  {
+    icon: "🔄",
+    title: "Follow-up Automation",
+    description: "Multi-channel automated follow-up sequences"
+  },
+  {
+    icon: "📊",
+    title: "Client Communication",
+    description: "Automated updates and report generation"
+  },
+  {
+    icon: "📅",
+    title: "Smart Scheduling",
+    description: "AI-optimized appointment booking system"
+  },
+  {
+    icon: "🔗",
+    title: "CRM Integration",
+    description: "Seamless integration with existing systems"
+  },
+  {
+    icon: "📱",
+    title: "Social Media Auto Posts",
+    description: "AI-crafted posts automatically published to your social channels"
   }
 ];
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 bg-dark-950 text-white">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            How AI Agent Rep <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Works</span>
+    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            AI-Powered Services
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Three simple steps to transform your lead generation and sales process
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Comprehensive Automation for All Fields & Professionals
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-3 gap-12">
-          {features.map((feature, index) => (
-            <div key={index} className="text-center group">
-              {/* Number Badge */}
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-200">
-                {feature.number}
-              </div>
-              
-              {/* Title */}
-              <h3 className="text-2xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
-                  {feature.number}.
-                </span> {feature.title}
-              </h3>
-              
-              {/* Description */}
-              <p className="text-white/80 leading-relaxed mb-6">
-                {feature.description}
-              </p>
-              
-              {/* Benefits */}
-              <ul className="space-y-3">
-                {feature.benefits.map((benefit, benefitIndex) => (
-                  <li key={benefitIndex} className="flex items-center justify-center space-x-2 text-white/90">
-                    <span className="text-green-400">✓</span>
-                    <span>{benefit}</span>
-                  </li>
-                ))}
-              </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((service, index) => (
+            <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-3xl mb-4 text-gray-600">{service.icon}</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h3>
+              <p className="text-gray-600 text-sm">{service.description}</p>
             </div>
           ))}
         </div>
