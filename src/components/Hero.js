@@ -92,13 +92,6 @@ export default function Hero() {
               />
               <div className="absolute inset-0 bg-black bg-opacity-20"></div>
               
-              {/* Image Description */}
-              <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 rounded-lg px-3 py-2">
-                <p className="text-gray-700 text-sm font-medium">
-                  Team working at table
-                </p>
-              </div>
-              
               {/* Overlay Box */}
               <div className="absolute bottom-4 right-4 bg-green-100 border border-green-200 rounded-lg p-4 max-w-xs">
                 <div className="flex items-center mb-2">
