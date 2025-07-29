@@ -111,7 +111,6 @@ function App() {
           </Routes>
         </main>
         <Footer />
-        <AIChatbot />
       </div>
     </Router>
   );
