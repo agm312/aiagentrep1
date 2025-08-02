@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import Layout from '@/components/Layout';
 
 const SetupCostForAIAutomation = () => {
   // Move all useState hooks to the top level - outside of try-catch
@@ -51,7 +52,7 @@ const SetupCostForAIAutomation = () => {
     console.log("✅ About to render JSX");
 
     return (
-      <>
+      <Layout>
         <Helmet>
           <title>AI Automation Setup Cost in 2025 | AI Agent Rep</title>
           <meta name="description" content="Discover the full cost breakdown of setting up AI automation—from consultation to monthly fees. Tailored for small to enterprise businesses." />
@@ -82,7 +83,7 @@ const SetupCostForAIAutomation = () => {
           </script>
         </Helmet>
         
-        <div className="bg-white min-h-screen">
+        <div className="bg-white">
           {/* Hero Section */}
           <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
@@ -449,7 +450,7 @@ const SetupCostForAIAutomation = () => {
             </div>
           </section>
         </div>
-      </>
+      </Layout>
     );
   } catch (error) {
     console.error("❌ Error in SetupCostForAIAutomation:", error);

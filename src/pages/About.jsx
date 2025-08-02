@@ -1,5 +1,6 @@
 import React from 'react';
 import AutomatedTasksAnimation from '../components/AutomatedTasksAnimation';
+import Layout from '@/components/Layout';
 
 const RobotLaptop = () => (
   <div className="fixed bottom-6 right-6 z-10 pointer-events-none" style={{width: 110, height: 110}}>
@@ -65,7 +66,8 @@ const RobotLaptop = () => (
 
 export default function About() {
   return (
-    <section className="min-h-screen bg-white py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative overflow-hidden">
+    <Layout>
+      <section className="bg-white py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative overflow-hidden">
       <AutomatedTasksAnimation />
       <RobotLaptop />
       <div className="max-w-2xl mx-auto text-center relative z-10">
@@ -74,5 +76,6 @@ export default function About() {
         <p className="text-lg text-gray-700">We believe in making advanced automation accessible and affordable for every business. With a focus on simplicity, results, and world-class support, we're your partner in the future of business automation.</p>
       </div>
     </section>
+    </Layout>
   );
 } 

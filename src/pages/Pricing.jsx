@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Layout from '@/components/Layout';
 
 const ROI_BASE = 0.085; // 8.5% conversion rate for ROI calculation
 const AVG_DEAL = 1000; // Average deal value in USD
@@ -105,7 +106,8 @@ export default function Pricing() {
   };
 
   return (
-    <section className="bg-gray-900 min-h-screen py-16 px-4 sm:px-6 lg:px-8 text-white">
+    <Layout>
+      <section className="bg-gray-900 py-16 px-4 sm:px-6 lg:px-8 text-white">
       <div className="max-w-5xl mx-auto">
         {/* Title above plans/prices */}
         <h2 className="text-4xl font-extrabold text-center mb-10 text-white">Choose Your Plan</h2>
@@ -237,5 +239,6 @@ export default function Pricing() {
         </div>
       </div>
     </section>
+    </Layout>
   );
 }

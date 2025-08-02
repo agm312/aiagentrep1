@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
+import Layout from '@/components/Layout';
 import { Link } from 'react-router-dom';
 
 const ROIOfAIAutomation = () => {
@@ -32,7 +33,7 @@ const ROIOfAIAutomation = () => {
   }, [calculateROI]);
 
   return (
-    <>
+    <Layout>
       <Helmet>
         <title>ROI of AI Automation: How to Measure, Calculate & Maximize</title>
         <meta name="description" content="Learn how to measure the ROI of AI automation with our easy calculator, real-world examples, and expert tips. Includes images, internal/external links & a YouTube embed." />
@@ -484,7 +485,7 @@ const ROIOfAIAutomation = () => {
           </section>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

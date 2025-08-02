@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import jsPDF from 'jspdf';
+import Layout from '@/components/Layout';
 
 const QuickStartChecklist = () => {
   const [formData, setFormData] = useState({
@@ -250,13 +251,13 @@ const QuickStartChecklist = () => {
   ];
 
   return (
-    <>
+    <Layout>
       <Helmet>
         <title>AI Agent Quick-Start Checklist | 10 Core Automations Every Service Business Needs</title>
         <meta name="description" content="Get your free Quick-Start Checklist and start booking appointments on autopilot. Download the 10 core AI automations every service business needs." />
       </Helmet>
       
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <div className="bg-gradient-to-br from-gray-50 to-white">
         {/* Hero Section */}
         <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
           {/* Logo - Smaller */}
@@ -605,7 +606,7 @@ const QuickStartChecklist = () => {
           </button>
         </section>
       </div>
-    </>
+    </Layout>
   );
 };
 
