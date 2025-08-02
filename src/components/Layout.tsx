@@ -1,0 +1,21 @@
+import { ReactNode } from "react";
+import Navbar from "./Navbar.tsx";
+import Footer from "./Footer.tsx";
+
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main className="pt-16">
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default Layout; 
