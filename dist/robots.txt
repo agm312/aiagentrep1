@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aiagentrep.com/sitemap.xml
+
+# Disallow admin/dashboard pages
+Disallow: /dashboard
+Disallow: /signin
+Disallow: /signup 
