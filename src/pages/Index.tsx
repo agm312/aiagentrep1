@@ -1,24 +1,27 @@
 import { useEffect } from "react";
-import Layout from "@/components/Layout.tsx";
-import Hero from "@/components/Hero.tsx";
-import Services from "@/components/Services.tsx";
-import HowItWorks from "@/components/HowItWorks.tsx";
-import About from "@/components/About.tsx";
-import FAQ from "@/components/FAQ.tsx";
-import Contact from "@/components/Contact.tsx";
+import Layout from "@/components/Layout";
+import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import HowItWorks from "@/components/HowItWorks";
+import About from "@/components/About";
+import FAQ from "@/components/FAQ";
+import Contact from "@/components/Contact";
 
 const Index = () => {
   useEffect(() => {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+      anchor.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href')!);
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+        const href = anchor.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
         }
       });
     });

@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout.tsx";
+import Layout from "@/components/Layout";
 
 const NotFound = () => {
   return (
