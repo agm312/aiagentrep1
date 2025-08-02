@@ -4,10 +4,12 @@ import { Helmet } from 'react-helmet';
 const AIDemoLanding = () => {
   const [formData, setFormData] = useState({
     name: '',
-    email: ''
+    company: '',
+    email: '',
+    website: '',
+    problems: [],
+    additionalDetails: ''
   });
-
-  const [activeFAQ, setActiveFAQ] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,294 +19,194 @@ const AIDemoLanding = () => {
     }));
   };
 
-
-
-  const toggleFAQ = (index) => {
-    setActiveFAQ(activeFAQ === index ? null : index);
+  const handleCheckboxChange = (problem) => {
+    setFormData(prev => ({
+      ...prev,
+      problems: prev.problems.includes(problem)
+        ? prev.problems.filter(p => p !== problem)
+        : [...prev.problems, problem]
+    }));
   };
 
-  const benefits = [
-    {
-      icon: '📅',
-      title: 'Fill Your Calendar While You Sleep',
-      description: 'AI-driven phone scripts & live booking that work 24/7'
-    },
-    {
-      icon: '💬',
-      title: 'Convert Cold Leads Into Conversations',
-      description: 'Triggered SMS & email sequences that nurture prospects'
-    },
-    {
-      icon: '🔍',
-      title: 'Never Drop a Follow-Up Again',
-      description: 'Score & prioritize leads automatically with smart reminders'
-    },
-    {
-      icon: '🔌',
-      title: 'Plug Into Any CRM in Minutes',
-      description: 'Auto-schedule meetings & integrate with your existing tools'
-    }
-  ];
-
-  const steps = [
-    {
-      number: '1',
-      title: 'Instantly Spin Up Your Live Demo',
-      description: 'Pick a time on our calendar and see your AI automation in action',
-      link: 'https://calendly.com/arturo312/ai-agency',
-      linkText: 'Schedule Demo'
-    },
-    {
-      number: '2',
-      title: 'Customize to Your Goals',
-      description: 'Let us know which parts of sales or support you want automated'
-    },
-    {
-      number: '3',
-      title: 'See Results in Real Time',
-      description: 'We\'ll spin up a live demo, answer your questions, and get you 100% set up'
-    }
-  ];
-
-  const faqs = [
-    {
-      question: 'Do I need to code?',
-      answer: 'Not at all! Our AI automation platform is completely no-code. We handle all the technical setup while you focus on growing your business.'
-    },
-    {
-      question: 'What integrations do you support?',
-      answer: 'We integrate with all major CRMs (Salesforce, HubSpot, Pipedrive), calendar systems (Google Calendar, Outlook), payment processors (Stripe, PayPal), and communication platforms (Slack, Teams).'
-    },
-    {
-      question: 'How long does it take to launch?',
-      answer: 'Most clients see their AI automation live within 24-48 hours after our demo. We can have basic workflows running the same day.'
-    },
-    {
-      question: 'Is the demo really free?',
-      answer: 'Absolutely! Our free AI automation demo is completely free with no strings attached. We want you to see the value before making any decisions.'
-    }
+  const problems = [
+    'Book more appointments automatically',
+    'Qualify leads without manual effort',
+    'Streamline scheduling and reminders',
+    'Social media posting and content scheduling',
+    'Nurture leads with smart follow-up',
+    'Automate client communications and updates',
+    'Integrate with my CRM or calendar'
   ];
 
   return (
     <>
       <Helmet>
-        <title>Free AI Automation Demo | AI Agent Rep</title>
-        <meta name="description" content="Try our Free AI Automation Demo today and see how custom AI agents can auto-post on socials, nurture leads, schedule appointments, and integrate seamlessly with your CRM." />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "Free AI Automation Demo",
-            "description": "See how custom AI agents can automate your sales, marketing, and support workflows.",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
-          })}
-        </script>
+        <title>Request Your AI Automation Demo | AI Agent Rep</title>
+        <meta name="description" content="Request your personalized AI automation demo. Tell us about your business and we'll create a customized demo showing how AI agents can automate your workflows." />
       </Helmet>
       
       <div className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section className="px-4 py-12 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-          {/* Logo */}
-          <div className="mb-6">
-            <div className="inline-flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#52c4a0] to-[#1da1f2] rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl font-bold">🤖</span>
-              </div>
-              <span className="text-2xl font-bold text-gray-900">AI AGENT REP</span>
-            </div>
+        {/* Header Spacer */}
+        <div className="h-16"></div>
+
+        {/* Main Content */}
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          {/* Title Section */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              Request Your AI Automation Demo
+            </h1>
+            <p className="text-lg text-gray-600 mb-2">
+              Tell us about your business and we'll create a personalized demo showing how AI agents can automate your workflows.
+            </p>
+            <p className="text-lg text-gray-600">
+              We'll review your website to better understand your business and prepare a customized demo.
+            </p>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-            See Your{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52c4a0] to-[#1da1f2]">
-              AI Automation in Action
-            </span>
-          </h1>
+          {/* Demo Request Form */}
+          <form 
+            name="demo-request" 
+            method="POST" 
+            data-netlify="true" 
+            netlify-honeypot="bot-field"
+            action="/success"
+            className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto"
+          >
+            {/* Hidden fields for Netlify Forms */}
+            <input type="hidden" name="form-name" value="demo-request" />
+            <input type="hidden" name="source" value="demo_request_page" />
+            <div className="hidden">
+              <input name="bot-field" />
+            </div>
 
-          {/* Sub-headline */}
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Get your free AI automation demo and see how our custom AI agents can instantly:
-          </p>
-          
-          <ul className="text-lg text-gray-600 mb-8 space-y-2 max-w-2xl mx-auto">
-            <li>• Auto-post on socials</li>
-            <li>• Nurture & qualify leads via SMS & email</li>
-            <li>• Schedule appointments and follow-ups</li>
-            <li>• Seamlessly integrate with your CRM, calendar & payments</li>
-          </ul>
-
-          {/* Email Form - Above the fold */}
-            <form 
-              name="ai-demo" 
-              method="POST" 
-              data-netlify="true" 
-              netlify-honeypot="bot-field"
-              action="/success"
-              className="max-w-md mx-auto mb-8"
-            >
-              {/* Hidden fields for Netlify Forms */}
-              <input type="hidden" name="form-name" value="ai-demo" />
-              <input type="hidden" name="source" value="ai_demo_landing_page" />
-              <div className="hidden">
-                <input name="bot-field" />
-              </div>
-              <div className="flex flex-col gap-3">
+            {/* Input Fields */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  Full Name *
+                </label>
                 <input
                   type="text"
+                  id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="Your name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#52c4a0] focus:border-transparent outline-none"
+                  placeholder="Your full name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                   required
                 />
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Your business email"
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#52c4a0] focus:border-transparent outline-none"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="px-8 py-3 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-lg"
-                  >
-                    Get My Free Demo
-                  </button>
-                </div>
-                <p className="text-sm text-gray-500">No spam. We hate it too.</p>
               </div>
-            </form>
-
-
-        </section>
-
-
-
-        {/* Benefits Grid */}
-        <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Why Our Free AI Automation Demo Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#52c4a0] to-[#1da1f2] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-2xl">{benefit.icon}</span>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
+              <div>
+                <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                  Company Name *
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleInputChange}
+                  placeholder="Your company name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  required
+                />
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* How the Demo Works */}
-        <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-4xl mx-auto bg-gray-50">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Book Your Free AI Automation Demo in 30 Seconds</h2>
-          <div className="space-y-8">
-            {steps.map((step, index) => (
-              <div key={index} className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white rounded-full flex items-center justify-center font-bold text-lg">
-                  {step.number}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{step.title}</h3>
-                  <p className="text-gray-600 mb-3">{step.description}</p>
-                  {step.link && (
-                    <a
-                      href={step.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block px-6 py-2 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-lg"
-                    >
-                      {step.linkText}
-                    </a>
-                  )}
-                </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Business Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="your@company.com"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  required
+                />
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">What Our Clients Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-6 bg-gray-50 rounded-lg relative">
-              <div className="absolute -top-3 left-6 w-6 h-6 bg-gray-50 transform rotate-45"></div>
-              <p className="text-gray-600 mb-4">"Our last client saw 3× more qualified leads in 7 days after implementing their AI automation."</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] rounded-full flex items-center justify-center mr-3">
-                  <span className="text-white font-bold">M</span>
-                </div>
-                <div>
-                  <div className="font-semibold text-gray-900">Marketing Agency Owner</div>
-                  <div className="text-sm text-gray-500">5-star review</div>
-                </div>
+              <div>
+                <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-2">
+                  Company Website *
+                </label>
+                <input
+                  type="url"
+                  id="website"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleInputChange}
+                  placeholder="https://yourcompany.com"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  required
+                />
               </div>
             </div>
-            <div className="p-6 bg-gray-50 rounded-lg relative">
-              <div className="absolute -top-3 left-6 w-6 h-6 bg-gray-50 transform rotate-45"></div>
-              <p className="text-gray-600 mb-4">"The AI agents handle all our lead qualification and scheduling. It's like having a full-time assistant."</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] rounded-full flex items-center justify-center mr-3">
-                  <span className="text-white font-bold">R</span>
-                </div>
-                <div>
-                  <div className="font-semibold text-gray-900">Real Estate Broker</div>
-                  <div className="text-sm text-gray-500">5-star review</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* FAQ Section */}
-        <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg">
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-semibold text-gray-900">{faq.question}</span>
-                  <span className="text-[#52c4a0] text-xl">
-                    {activeFAQ === index ? '−' : '+'}
-                  </span>
-                </button>
-                {activeFAQ === index && (
-                  <div className="px-6 pb-4">
-                    <p className="text-gray-600">{faq.answer}</p>
+            {/* Problems Section */}
+            <div className="mb-8">
+              <label className="block text-sm font-medium text-gray-700 mb-4">
+                What would you like to solve? (Select all that apply) *
+              </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {problems.map((problem, index) => (
+                  <div key={index} className="flex items-start">
+                    <input
+                      type="checkbox"
+                      id={`problem-${index}`}
+                      name="problems"
+                      value={problem}
+                      checked={formData.problems.includes(problem)}
+                      onChange={() => handleCheckboxChange(problem)}
+                      className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    />
+                    <label htmlFor={`problem-${index}`} className="ml-3 text-sm text-gray-700">
+                      {problem}
+                    </label>
                   </div>
-                )}
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
 
-        {/* Final CTA */}
-        <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center bg-gradient-to-r from-[#52c4a0] to-[#1da1f2] rounded-lg mx-4 mb-8 shadow-xl">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Stop Chasing Leads?</h2>
-          <p className="text-xl text-white/90 mb-4">Book your free AI automation demo today and let our agents work for you.</p>
-          <p className="text-lg text-white/80 mb-8 font-semibold">Only 5 demo slots left this week!</p>
-          <a
-            href="https://calendly.com/arturo312/ai-agency"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-4 bg-white text-[#52c4a0] font-bold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
-          >
-            Get My Free AI Automation Demo
-          </a>
-        </section>
+            {/* Additional Details */}
+            <div className="mb-8">
+              <label htmlFor="additionalDetails" className="block text-sm font-medium text-gray-700 mb-2">
+                Additional details (optional)
+              </label>
+              <textarea
+                id="additionalDetails"
+                name="additionalDetails"
+                value={formData.additionalDetails}
+                onChange={handleInputChange}
+                placeholder="Tell us more about your current processes, specific challenges, or any other details that would help us create a better demo for you."
+                rows={4}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              />
+            </div>
+
+            {/* Submit Section */}
+            <div className="text-center">
+              <p className="text-sm text-gray-500 mb-4">* Required fields</p>
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity shadow-lg"
+              >
+                Request Demo
+              </button>
+            </div>
+          </form>
+
+          {/* Contact Info */}
+          <div className="text-center mt-8">
+            <p className="text-gray-600">
+              Need immediate assistance? Contact us at{' '}
+              <a href="mailto:info@aiagentrep.com" className="text-blue-600 hover:underline">
+                info@aiagentrep.com
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );
