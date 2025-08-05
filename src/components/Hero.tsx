@@ -1,18 +1,19 @@
 import { Zap } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim()) {
-      // Redirect to demo page with email parameter
-      const demoUrl = `https://aiagentrep.com/demo?email=${encodeURIComponent(email.trim())}`;
-      window.open(demoUrl, '_blank');
+      // Navigate to demo page with email parameter
+      navigate(`/demo?email=${encodeURIComponent(email.trim())}`);
     } else {
-      // If no email, just redirect to demo page
-      window.open('https://aiagentrep.com/demo', '_blank');
+      // If no email, just navigate to demo page
+      navigate('/demo');
     }
   };
 

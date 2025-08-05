@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { useSearchParams } from 'react-router-dom';
 
 const AIDemoLanding = () => {
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -10,6 +12,17 @@ const AIDemoLanding = () => {
     problems: [],
     additionalDetails: ''
   });
+
+  // Auto-fill email from URL parameter
+  useEffect(() => {
+    const emailFromUrl = searchParams.get('email');
+    if (emailFromUrl) {
+      setFormData(prev => ({
+        ...prev,
+        email: emailFromUrl
+      }));
+    }
+  }, [searchParams]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -93,7 +106,8 @@ const AIDemoLanding = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Your full name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-black !text-black"
+                  style={{ color: 'black' }}
                   required
                 />
               </div>
@@ -108,7 +122,8 @@ const AIDemoLanding = () => {
                   value={formData.company}
                   onChange={handleInputChange}
                   placeholder="Your company name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-black !text-black"
+                  style={{ color: 'black' }}
                   required
                 />
               </div>
@@ -123,7 +138,8 @@ const AIDemoLanding = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="your@company.com"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-black !text-black"
+                  style={{ color: 'black' }}
                   required
                 />
               </div>
@@ -138,7 +154,8 @@ const AIDemoLanding = () => {
                   value={formData.website}
                   onChange={handleInputChange}
                   placeholder="https://yourcompany.com"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-black !text-black"
+                  style={{ color: 'black' }}
                   required
                 />
               </div>
@@ -181,7 +198,8 @@ const AIDemoLanding = () => {
                 onChange={handleInputChange}
                 placeholder="Tell us more about your current processes, specific challenges, or any other details that would help us create a better demo for you."
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-black !text-black"
+                style={{ color: 'black' }}
               />
             </div>
 

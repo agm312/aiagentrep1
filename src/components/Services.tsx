@@ -1,4 +1,5 @@
 import { MessageSquare, Settings, BarChart3, FileText, Zap, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Services = () => {
   const services = [
@@ -77,14 +78,12 @@ const Services = () => {
                 ))}
               </ul>
               
-              <a 
-                href="https://aiagentrep.com/demo"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link 
+                to="/demo"
                 className="w-full bg-gray-700 text-white py-3 rounded-lg font-semibold hover:bg-gray-600 transition-colors duration-300 text-center block"
               >
                 See It In Action
-              </a>
+              </Link>
             </div>
           ))}
         </div>
